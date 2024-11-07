@@ -108,10 +108,3 @@ If you encounter issues, ensure that:
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 ```
-
-### Key Changes:
-- **Code Block Syntax**: Corrected the indentation for better readability of the project structure.
-- **Route List**: Added `/logout` to the routes section for clarity.
-- **File Extensions**: Changed `.html` to `.ejs` for files that should render dynamically with EJS templates.
-- **Formatting Consistency**: Cleaned up the overall structure for consistency and clarity.
-
