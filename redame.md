@@ -46,8 +46,9 @@ Follow these steps to set up the project locally:
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/gestion-de-stock.git
-cd gestion-de-stock
+git clone https://github.com/NouhaylaEnnadri/gestionDEstock.git
+cd gestionDEstock
+
 ```
 ````
 

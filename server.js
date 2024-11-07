@@ -66,49 +66,38 @@ app.get("/", (req, res) => {
   });
 });
 
-// Login Route (GET)
-app.get("/login", (req, res) => {
-  res.render("login");
-});
+// Edit Product Route (GET)
+app.get("/edit-product/:id", (req, res) => {
+  const productId = req.params.id;
 
-// Login Route (POST)
-app.post("/login", (req, res) => {
-  const { username, password } = req.body;
-  db.get(
-    "SELECT * FROM users WHERE username = ? AND password = ?",
-    [username, password],
-    (err, user) => {
-      if (err) {
-        console.error("Database error:", err);
-        return res.status(500).send("Error logging in");
-      }
-      if (user) {
-        req.session.userId = user.id; // Store user session
-        res.redirect("/");
-      } else {
-        res.send("Invalid credentials");
-      }
+  db.get("SELECT * FROM products WHERE id = ?", [productId], (err, product) => {
+    if (err) {
+      console.error("Database error:", err);
+      return res.status(500).send("Error fetching product details");
     }
-  );
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+    res.render("edit-product", {
+      product: product,
+    });
+  });
 });
 
-// Register Route (GET)
-app.get("/register", (req, res) => {
-  res.render("register");
-});
+// Edit Product Route (POST)
+app.post("/edit-product/:id", (req, res) => {
+  const productId = req.params.id;
+  const { name, quantity, price } = req.body;
 
-// Register Route (POST)
-app.post("/register", (req, res) => {
-  const { username, password } = req.body;
   db.run(
-    "INSERT INTO users (username, password) VALUES (?, ?)",
-    [username, password],
+    "UPDATE products SET name = ?, quantity = ?, price = ? WHERE id = ?",
+    [name, quantity, price, productId],
     (err) => {
       if (err) {
         console.error("Database error:", err);
-        return res.status(500).send("Error registering");
+        return res.status(500).send("Error updating product");
       }
-      res.redirect("/login");
+      res.redirect("/");
     }
   );
 });
@@ -135,13 +124,6 @@ app.post("/add-product", (req, res) => {
       res.redirect("/");
     }
   );
-});
-
-// Logout Route
-app.get("/logout", (req, res) => {
-  req.session.destroy(() => {
-    res.redirect("/");
-  });
 });
 
 // Delete Product Route (POST)
