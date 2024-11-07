@@ -1,0 +1,19 @@
+# .gitignore
+
+# Ignore database file
+database.db
+
+# Ignore node_modules
+node_modules/
+
+# Ignore environment variables file
+.env
+
+# Ignore log files
+*.log
+
+# Ignore Mac system files
+.DS_Store
+
+# Ignore temporary files
+tmp/
