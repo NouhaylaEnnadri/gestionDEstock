@@ -1,4 +1,3 @@
-
 ````markdown
 # Gestion de Stock
 
@@ -13,23 +12,20 @@ A simple inventory management system built with **Node.js**, **Express**, **SQLi
 
 ## Project Structure
 
-```
 gestionDEstock/
 ├── db/
-│   └── database.js            # Database setup and connection
+│ └── database.js # Database setup and connection
 ├── public/
-│   ├── css/
-│   │   └── styles.css         # Stylesheet for the app
-│   └── js/
-│       └── app.js             # Optional JavaScript for additional client functionality
+│ ├── css/
+│ │ └── styles.css # Stylesheet for the app
+│ └── js/
+│ └── app.js # Optional JavaScript for additional client functionality
 ├── views/
-│   ├── index.html             # Main page to view all products
-│   └── add-product.html       # Form page to add a new product
-├── server.js                  # Main server file
-├── package.json               # Project dependencies and scripts
-└── README.md                  # Project setup and instructions
-```
-
+│ ├── index.html # Main page to view all products
+│ └── add-product.html # Form page to add a new product
+├── server.js # Main server file
+├── package.json # Project dependencies and scripts
+└── README.md # Project setup and instructions
 
 ## Technologies Used
 
@@ -48,9 +44,7 @@ Follow these steps to set up the project locally:
 ```bash
 git clone https://github.com/NouhaylaEnnadri/gestionDEstock.git
 cd gestionDEstock
-
 ```
-````
 
 ### 2. Install dependencies
 
@@ -123,3 +117,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 6. **Troubleshooting**: Common issues that could arise and their solutions.
 
 ```
+````
