@@ -3,44 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gestion de Stock</title>
-  <link rel="stylesheet" href="/css/style.css"> <!-- Include your custom CSS -->
+  <title>StockGest</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-100">
 
-  <nav>
-    <a href="/">Home</a>
-    <% if (!userId) { %>
-      <a href="/login">Login</a>
-      <a href="/register">Register</a>
-    <% } else { %>
-      <a href="/add-product">Add Product</a>
-      <a href="/logout">Logout</a>
-    <% } %>
-  </nav>
+  <!-- Header -->
+  <header class="fixed top-0 left-0 right-0 p-2 flex justify-between items-center bg-green-200 text-white z-10">
+    <div class="flex items-center ml-6">
+      <h1 class="text-lg font-bold text-gray-700">StockGest</h1>
+    </div>
 
-  <h1>Product Management</h1>
+    <nav class="space-x-6 text-lg mr-6">
+      <a href="/login" class="hover:text-green-500 transition-all">Login</a>
+      <a href="/register" class="hover:text-green-500 transition-all">Register</a>
+    </nav>
+  </header>
 
-  <div class="product-list">
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Quantity</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% products.forEach(product => { %>
-          <tr>
-            <td><%= product.name %></td>
-            <td><%= product.quantity %></td>
-            <td><%= product.price %></td>
+  <!-- Main Content -->
+  <div class="container mx-auto pt-20 pb-8 px-4">
+    <h2 class="text-2xl font-semibold mb-6">Product List</h2>
+
+    <!-- Add Product Button - Now inside table and at the top -->
+    <div class="relative max-w-4xl mx-auto mb-6">
+      <a href="/add-product" class="bg-blue-600 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-700 transition-all absolute top-0 right-0 z-20">
+        Add Product
+      </a>
+    </div>
+
+    <!-- Table -->
+    <div class="relative max-w-4xl mx-auto">
+      <table class="w-full table-auto border-separate border-spacing-0 shadow-lg mb-10">
+        <thead>
+          <tr class="bg-green-200 text-gray-700">
+            <th class="px-4 py-2">Name</th>
+            <th class="px-4 py-2">Quantity</th>
+            <th class="px-4 py-2">Price</th>
+            <th class="px-4 py-2">Actions</th> <!-- Added Actions column -->
           </tr>
-        <% }) %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <!-- Loop through products here -->
+          <% products.forEach(product => { %>
+            <tr class="bg-white hover:bg-gray-100 transition-all">
+              <td class="px-4 py-2"><%= product.name %></td>
+              <td class="px-4 py-2"><%= product.quantity %></td>
+              <td class="px-4 py-2"><%= product.price %></td>
+              <td class="px-4 py-2 text-center">
+                <!-- Edit and Delete buttons -->
+                <a href="/edit-product/<%= product.id %>" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition-all mr-2">Edit</a>
+                <a href="/delete-product/<%= product.id %>" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition-all">Delete</a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
   </div>
+
+  <!-- Footer -->
+  
+
+  <!-- Add Material Icons Library -->
+  <script src="https://cdn.jsdelivr.net/npm/material-icons@latest/iconfont/material-icons.min.js"></script>
 
 </body>
 </html>

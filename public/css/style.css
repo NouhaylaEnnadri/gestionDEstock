@@ -1,72 +1,159 @@
+/* Global Styles */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+    background-color: #f1f5f9;
+    font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
-  }
-  
-  nav {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  nav a {
-    color: white;
-    margin: 0 15px;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 15px; /* Smaller padding */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #aec6cf; /* Pastel Blue */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Light border at the bottom */
+    z-index: 1000;
+}
+
+header h1 {
+    color: #374151; /* Darker gray for text */
+    font-size: 1.1rem; /* Slightly smaller font size */
+    font-weight: 600;
+}
+
+nav a {
+    color: #374151; /* Dark gray text */
     text-decoration: none;
-  }
-  
-  nav a:hover {
-    text-decoration: underline;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .product-list {
-    width: 80%;
-    margin: 20px auto;
-  }
-  
-  table {
+    font-size: 0.875rem;
+    padding: 5px 10px;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+nav a:hover {
+    color: #4ade80; /* Light green on hover */
+    transform: scale(1.05);
+}
+
+/* Table styles */
+/* Remove margin-top from table */
+table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 0; /* Set margin-top to 0 to remove spacing */
   }
   
-  table, th, td {
-    border: 1px solid #ddd;
-  }
-  
-  th, td {
-    padding: 10px;
-    text-align: center;
-  }
-  
-  form {
-    width: 300px;
+
+thead {
+    background-color: #aec6cf; /* Pastel Blue */
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    color: #374151;
+}
+
+tr:nth-child(even) {
+    background-color: #f9fafb;
+}
+
+tr:hover {
+    background-color: #f3f4f6;
+    transition: background-color 0.3s ease;
+}
+
+/* Table container */
+.relative {
+    max-width: 100%;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  form input {
-    padding: 10px;
-    margin: 10px 0;
-  }
-  
-  form button {
-    padding: 10px;
-    background-color: #333;
+    border: 2px solid #e2e8f0; /* Light border around table */
+    border-radius: 8px;
+    padding: 20px;
+    background-color: white;
+}
+
+/* Button styles for Add, Edit, and Delete buttons */
+a.bg-blue-600 {
+    background-color: #1d4ed8; /* Darker Blue for Add Product */
     color: white;
-    border: none;
-  }
-  
-  form button:hover {
-    background-color: #555;
-  }
-  
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+a.bg-blue-600:hover {
+    background-color: #2563eb; /* Slightly darker blue on hover */
+    transform: translateY(-2px);
+}
+
+a.bg-green-500 {
+    background-color: #10b981; /* Green for Edit */
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+a.bg-green-500:hover {
+    background-color: #16a34a; /* Slightly darker green on hover */
+    transform: translateY(-2px);
+}
+
+a.bg-red-500 {
+    background-color: #f87171; /* Red for Delete */
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+a.bg-red-500:hover {
+    background-color: #ef4444; /* Slightly darker red on hover */
+    transform: translateY(-2px);
+}
+
+/* Footer */
+footer {
+    background-color: #aec6cf; /* Pastel Blue */
+    color: #374151; /* Dark gray */
+    text-align: center;
+    padding: 5px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav {
+        margin-top: 10px;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    .relative {
+        margin-bottom: 30px; /* Ensuring the button is visible on smaller screens */
+    }
+}
