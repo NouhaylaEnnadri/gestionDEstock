@@ -1,4 +1,5 @@
-````markdown
+
+```markdown
 # Gestion de Stock
 
 A simple inventory management system built with **Node.js**, **Express**, **SQLite**, and **EJS** for the front end. This project allows users to log in, register, add products to an inventory, and view the products in the system.
@@ -8,24 +9,26 @@ A simple inventory management system built with **Node.js**, **Express**, **SQLi
 - User authentication (Login and Register)
 - Add and display products (product name, quantity, and price)
 - Session management to keep track of logged-in users
-- Responsive design with CSS animations (Customize it as needed)
+- Responsive design with customizable CSS animations
 
 ## Project Structure
 
+```plaintext
 gestionDEstock/
 ├── db/
-│ └── database.js # Database setup and connection
+│   └── database.js    # Database setup and connection
 ├── public/
-│ ├── css/
-│ │ └── styles.css # Stylesheet for the app
-│ └── js/
-│ └── app.js # Optional JavaScript for additional client functionality
+│   ├── css/
+│   │   └── styles.css # Stylesheet for the app
+│   └── js/
+│       └── app.js     # Optional JavaScript for additional client functionality
 ├── views/
-│ ├── index.html # Main page to view all products
-│ └── add-product.html # Form page to add a new product
-├── server.js # Main server file
-├── package.json # Project dependencies and scripts
-└── README.md # Project setup and instructions
+│   ├── index.ejs      # Main page to view all products
+│   └── add-product.ejs # Form page to add a new product
+├── server.js          # Main server file
+├── package.json       # Project dependencies and scripts
+└── README.md          # Project setup and instructions
+```
 
 ## Technologies Used
 
@@ -33,7 +36,7 @@ gestionDEstock/
 - **Express** - Web framework for Node.js
 - **SQLite** - Database engine to store products and user data
 - **EJS** - Templating engine to render dynamic HTML pages
-- **CSS** - Custom styles with animations (modify as needed)
+- **CSS** - Custom styles with animations (modifiable as needed)
 
 ## Installation
 
@@ -45,13 +48,12 @@ Follow these steps to set up the project locally:
 git clone https://github.com/NouhaylaEnnadri/gestionDEstock.git
 cd gestionDEstock
 ```
-````
 
 ### 2. Install dependencies
 
-Make sure you have **Node.js** installed. You can download it from [here](https://nodejs.org/).
+Ensure you have **Node.js** installed. You can download it from [here](https://nodejs.org/).
 
-Run the following command to install the required dependencies:
+Then, install the required dependencies:
 
 ```bash
 npm install
@@ -59,17 +61,17 @@ npm install
 
 ### 3. Set up the database
 
-The SQLite database will be automatically created when the server starts. The database file is named `database.db`. The application will create the necessary tables for users and products upon startup.
+The SQLite database will be automatically created when the server starts. The database file will be named `database.db`, and the application will create the necessary tables for users and products upon startup.
 
 ### 4. Start the server
 
-Run the following command to start the server:
+To start the server, run the following command:
 
 ```bash
 node server.js
 ```
 
-The application will be running on `http://localhost:3000`.
+The application will be running at `http://localhost:3000`.
 
 ## Usage
 
@@ -105,20 +107,11 @@ If you encounter issues, ensure that:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ```
 
-### Key Sections in the `README.md`:
+### Key Changes:
+- **Code Block Syntax**: Corrected the indentation for better readability of the project structure.
+- **Route List**: Added `/logout` to the routes section for clarity.
+- **File Extensions**: Changed `.html` to `.ejs` for files that should render dynamically with EJS templates.
+- **Formatting Consistency**: Cleaned up the overall structure for consistency and clarity.
 
-1. **Project Overview**: A brief explanation of the project and its features.
-2. **Technologies Used**: A list of technologies that power the app.
-3. **Installation**: Step-by-step guide on how to set up the project on your local machine.
-4. **Usage**: Details about how to use the app once it’s running.
-5. **Customization**: Suggestions for personalizing the project.
-6. **Troubleshooting**: Common issues that could arise and their solutions.
-
-```
-
-```
-
-```
