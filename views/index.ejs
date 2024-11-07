@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestion de Stock</title>
+  <link rel="stylesheet" href="/css/style.css"> <!-- Include your custom CSS -->
+</head>
+<body>
+
+  <nav>
+    <a href="/">Home</a>
+    <% if (!userId) { %>
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+    <% } else { %>
+      <a href="/add-product">Add Product</a>
+      <a href="/logout">Logout</a>
+    <% } %>
+  </nav>
+
+  <h1>Product Management</h1>
+
+  <div class="product-list">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% products.forEach(product => { %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.quantity %></td>
+            <td><%= product.price %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
