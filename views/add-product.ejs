@@ -4,20 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Product</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/add_product.css">
 </head>
 <body>
 
-  <h1>Add a New Product</h1>
-  
-  <form action="/add-product" method="POST">
-    <input type="text" name="name" placeholder="Product Name" required>
-    <input type="number" name="quantity" placeholder="Quantity" required>
-    <input type="number" name="price" placeholder="Price" required>
-    <button type="submit">Add Product</button>
-  </form>
+  <header>
+    <div>
+      <h1>StockGest - Add Product</h1>
+    </div>
+  </header>
 
-  <p><a href="/">Back to Product List</a></p>
+  <div class="container mx-auto pt-20 pb-8 px-4">
+    <h2 class="text-2xl font-semibold mb-6">Add New Product</h2>
+    
+    <form action="/add-product" method="POST" class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+      <div class="mb-4">
+        <label for="name" class="block text-gray-700 font-semibold mb-2">Product Name</label>
+        <input type="text" name="name" id="name" placeholder="Enter product name" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+
+      <div class="mb-4">
+        <label for="quantity" class="block text-gray-700 font-semibold mb-2">Quantity</label>
+        <input type="number" name="quantity" id="quantity" placeholder="Enter quantity" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+
+      <div class="mb-4">
+        <label for="price" class="block text-gray-700 font-semibold mb-2">Price</label>
+        <input type="number" name="price" id="price" placeholder="Enter price" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+      </div>
+
+      <div class="mb-4 text-right">
+        <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-700 transition-all">
+          Add Product
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 StockGest</p>
+  </footer>
 
 </body>
 </html>
