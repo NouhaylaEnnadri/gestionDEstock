@@ -3,7 +3,7 @@ const sqlite3 = require("sqlite3").verbose();
 const session = require("express-session");
 const path = require("path");
 const bodyParser = require("body-parser");
-const methodOverride = require("method-override"); // Used for overriding POST to DELETE
+const methodOverride = require("method-override");
 
 const app = express();
 const db = new sqlite3.Database("./database.db");
@@ -15,8 +15,8 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public"))); // Serve static files like CSS
 
-// Method Override middleware for DELETE requests
-app.use(methodOverride('_method'));
+// Method Override middleware for PUT and DELETE requests
+app.use(methodOverride('_method')); // Ensure this is in place
 
 // Session middleware
 app.use(
@@ -35,17 +35,6 @@ db.serialize(() => {
       name TEXT NOT NULL,
       quantity INTEGER NOT NULL,
       price REAL NOT NULL
-    )
-  `);
-});
-
-// Create users table if it doesn't exist
-db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS users (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      username TEXT NOT NULL,
-      password TEXT NOT NULL
     )
   `);
 });
@@ -84,8 +73,8 @@ app.get("/edit-product/:id", (req, res) => {
   });
 });
 
-// Edit Product Route (POST)
-app.post("/edit-product/:id", (req, res) => {
+// Edit Product Route (PUT)
+app.put("/edit-product/:id", (req, res) => {
   const productId = req.params.id;
   const { name, quantity, price } = req.body;
 
