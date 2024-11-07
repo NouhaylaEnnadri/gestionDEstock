@@ -45,6 +45,7 @@ Follow these steps to set up the project locally:
 git clone https://github.com/NouhaylaEnnadri/gestionDEstock.git
 cd gestionDEstock
 ```
+````
 
 ### 2. Install dependencies
 
@@ -117,4 +118,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 6. **Troubleshooting**: Common issues that could arise and their solutions.
 
 ```
-````
+
+```
+
+```
