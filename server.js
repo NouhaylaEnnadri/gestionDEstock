@@ -72,10 +72,19 @@ app.post("/login", (req, res) => {
 });
 
 // Logout Route
+// Logout Route (GET)
 app.get("/logout", (req, res) => {
-  req.session.destroy();
-  res.redirect("/login");
+  // Destroy the session
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Session destruction error:", err);
+      return res.status(500).send("Error logging out");
+    }
+    // Redirect to the homepage after logout
+    res.redirect("/");
+  });
 });
+
 
 // Add Product Route (GET)
 app.get("/add-product", (req, res) => {
