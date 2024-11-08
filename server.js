@@ -10,13 +10,12 @@ const db = new sqlite3.Database("./database.db");
 
 // Set EJS as the view engine
 app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public"))); // Serve static files like CSS
-
-// Method Override middleware for PUT and DELETE requests
-app.use(methodOverride('_method')); // Ensure this is in place
+app.use(methodOverride('_method'));
 
 // Session middleware
 app.use(
@@ -27,49 +26,78 @@ app.use(
   })
 );
 
-// Create products table if it doesn't exist
+// Create tables if they don't exist
 db.serialize(() => {
-  db.run(`
-    CREATE TABLE IF NOT EXISTS products (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL,
-      quantity INTEGER NOT NULL,
-      price REAL NOT NULL
-    )
-  `);
+  db.run(`CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)`);
+  db.run(`CREATE TABLE IF NOT EXISTS products (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, quantity INTEGER NOT NULL, price REAL NOT NULL)`);
 });
 
 // Routes
 
-// Home Route (Displays products)
+// Home Route
 app.get("/", (req, res) => {
   db.all("SELECT * FROM products", (err, products) => {
-    if (err) {
-      console.error("Database error:", err);
-      return res.status(500).send("Error retrieving products");
-    }
-    res.render("index", {
-      userId: req.session.userId,
-      products: products,
-    });
+    if (err) return res.status(500).send("Error retrieving products");
+    res.render("index", { userId: req.session.userId, products });
+  });
+});
+
+// Register Route (GET)
+app.get("/register", (req, res) => {
+  res.render("register");
+});
+
+// Register Route (POST)
+app.post("/register", (req, res) => {
+  const { username, password } = req.body;
+  db.run("INSERT INTO users (username, password) VALUES (?, ?)", [username, password], (err) => {
+    if (err) return res.status(500).send("Error registering user");
+    res.redirect("/login");
+  });
+});
+
+// Login Route (GET)
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+// Login Route (POST)
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  db.get("SELECT id FROM users WHERE username = ? AND password = ?", [username, password], (err, row) => {
+    if (err || !row) return res.status(401).send("Invalid credentials");
+    req.session.userId = row.id;
+    res.redirect("/");
+  });
+});
+
+// Logout Route
+app.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/login");
+});
+
+// Add Product Route (GET)
+app.get("/add-product", (req, res) => {
+  if (!req.session.userId) return res.redirect("/login");
+  res.render("add-product");
+});
+
+// Add Product Route (POST)
+app.post("/add-product", (req, res) => {
+  const { name, quantity, price } = req.body;
+  db.run("INSERT INTO products (name, quantity, price) VALUES (?, ?, ?)", [name, quantity, price], (err) => {
+    if (err) return res.status(500).send("Error adding product");
+    res.redirect("/");
   });
 });
 
 // Edit Product Route (GET)
 app.get("/edit-product/:id", (req, res) => {
   const productId = req.params.id;
-
   db.get("SELECT * FROM products WHERE id = ?", [productId], (err, product) => {
-    if (err) {
-      console.error("Database error:", err);
-      return res.status(500).send("Error fetching product details");
-    }
-    if (!product) {
-      return res.status(404).send("Product not found");
-    }
-    res.render("edit-product", {
-      product: product,
-    });
+    if (err || !product) return res.status(404).send("Product not found");
+    res.render("edit-product", { product });
   });
 });
 
@@ -77,55 +105,17 @@ app.get("/edit-product/:id", (req, res) => {
 app.put("/edit-product/:id", (req, res) => {
   const productId = req.params.id;
   const { name, quantity, price } = req.body;
-
-  db.run(
-    "UPDATE products SET name = ?, quantity = ?, price = ? WHERE id = ?",
-    [name, quantity, price, productId],
-    (err) => {
-      if (err) {
-        console.error("Database error:", err);
-        return res.status(500).send("Error updating product");
-      }
-      res.redirect("/");
-    }
-  );
+  db.run("UPDATE products SET name = ?, quantity = ?, price = ? WHERE id = ?", [name, quantity, price, productId], (err) => {
+    if (err) return res.status(500).send("Error updating product");
+    res.redirect("/");
+  });
 });
 
-// Add Product Route (GET)
-app.get("/add-product", (req, res) => {
-  if (!req.session.userId) {
-    return res.redirect("/login");
-  }
-  res.render("add-product");
-});
-
-// Add Product Route (POST)
-app.post("/add-product", (req, res) => {
-  const { name, quantity, price } = req.body;
-  db.run(
-    "INSERT INTO products (name, quantity, price) VALUES (?, ?, ?)",
-    [name, quantity, price],
-    (err) => {
-      if (err) {
-        console.error("Database error:", err);
-        return res.status(500).send("Error adding product");
-      }
-      res.redirect("/");
-    }
-  );
-});
-
-// Delete Product Route (POST)
-app.post("/delete-product/:id", (req, res) => {
+// Delete Product Route (DELETE)
+app.delete("/delete-product/:id", (req, res) => {
   const productId = req.params.id;
-
-  db.run("DELETE FROM products WHERE id = ?", [productId], function (err) {
-    if (err) {
-      console.error("Database error:", err);
-      return res.status(500).send("Error deleting product");
-    }
-
-    // Redirect to the homepage (product list) after deletion
+  db.run("DELETE FROM products WHERE id = ?", [productId], (err) => {
+    if (err) return res.status(500).send("Error deleting product");
     res.redirect("/");
   });
 });

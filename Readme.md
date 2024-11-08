@@ -1,8 +1,8 @@
-
-```markdown
+````markdown
 # Gestion de Stock
 
 A simple inventory management system built with **Node.js**, **Express**, **SQLite**, and **EJS** for the front end. This project allows users to log in, register, add products to an inventory, and view the products in the system.
+
 
 ## Features
 
@@ -29,6 +29,7 @@ gestionDEstock/
 ├── package.json       # Project dependencies and scripts
 └── README.md          # Project setup and instructions
 ```
+````
 
 ## Technologies Used
 
@@ -107,4 +108,7 @@ If you encounter issues, ensure that:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+```
+
 ```
